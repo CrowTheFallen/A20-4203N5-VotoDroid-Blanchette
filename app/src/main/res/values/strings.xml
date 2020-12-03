@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">VoteDroid</string>
+
+    <string name="AJOUTER">AJOUTER</string>
+    <string name="Supvotes">Supprime les votes</string>
+    <string name="SupQuestion">Supprime les questions</string>
 </resources>

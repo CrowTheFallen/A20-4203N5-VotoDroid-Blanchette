@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MenuActivity">
+    <item android:id="@+id/Supprime_votes" android:title="@string/Supvotes"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/Supprime_Question" android:title="@string/SupQuestion"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+
+</menu>
