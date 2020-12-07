@@ -1,13 +1,14 @@
 package com.example.votedroid.service;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.votedroid.R;
+import com.example.votedroid.repo.MaBD;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MaBD bd = Room.databaseBuilder(getApplicationContext(), MaBD.class, "MaBD")
+                .allowMainThreadQueries()
+                .build();
     }
 
     @Override

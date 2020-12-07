@@ -37,7 +37,7 @@ public class TestServiceImplementation {
         Service service = new ServiceImplementation();
         VDQuestion vdQuestion = new VDQuestion();
         vdQuestion.contenue = "Bonjour je suis une nouvelle question";
-        vdQuestion.id = 3;
+        vdQuestion.id = Long.valueOf(3);
         service.ajoutQuestion(vdQuestion);
     }
     @Test(expected = QuestionInvalideExistante.class)
@@ -93,7 +93,7 @@ public class TestServiceImplementation {
         vdVote.idQuestion = vdQuestion.id;
         vdVote.nom = "Bob";
         vdVote.vote = 3;
-        vdVote.id = String.valueOf(16);
+        vdVote.id = Long.valueOf(16);
         service.ajoutVote(vdVote);
     }
     @Test(expected = VoteInvalideLongueur.class)

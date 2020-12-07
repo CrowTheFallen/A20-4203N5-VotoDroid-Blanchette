@@ -5,10 +5,8 @@ import com.example.votedroid.interfaces.Service;
 import com.example.votedroid.modele.VDVote;
 import com.example.votedroid.modele.VDQuestion;
 
-import java.text.Collator;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
+
 
 public class ServiceImplementation implements Service {
     private List<VDQuestion> questions = new ArrayList<VDQuestion>();
@@ -19,14 +17,14 @@ public class ServiceImplementation implements Service {
     @Override
     public void ajoutQuestion(VDQuestion question) throws QuestionInvalide, QuestionInvalideLongueur, QuestionInvalideExistante {
         //Validation
-        if(question.id != 0) throw new QuestionInvalide();
+        if(question.id != null) throw new QuestionInvalide();
         if(question.contenue.length() < 5 || question.contenue.length() > 255) throw new QuestionInvalideLongueur();
         for (VDQuestion Q: questions) {
             if(question.contenue.toUpperCase().equals(Q.contenue.toUpperCase()) )
                 throw new QuestionInvalideExistante(); }
         //Ajout
         idQuestionCompteur++;
-        question.id = idQuestionCompteur;
+        question.id = Long.valueOf(idQuestionCompteur);
         questions.add(question);
     }
 
@@ -47,7 +45,7 @@ public class ServiceImplementation implements Service {
         }
         //Ajout
         idVoteCompteur++;
-        vote.id = "" + idVoteCompteur;
+        vote.id = Long.valueOf(idVoteCompteur);
         votes.add(vote);
     }
 
