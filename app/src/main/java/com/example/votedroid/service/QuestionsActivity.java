@@ -1,23 +1,36 @@
 package com.example.votedroid.service;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.votedroid.R;
-import com.example.votedroid.repo.MaBD;
+import com.example.votedroid.databinding.QuestionActivityBinding;
+
 
 public class QuestionsActivity extends AppCompatActivity {
-
+    private QuestionActivityBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = QuestionActivityBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-
+        binding.buttonAjouterMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QuestionsActivity.this,CreateActivity.class);
+                //intent.putExtra("id",12);
+                //intent.putExtra("age", 25);
+                //intent.putExtra("Cash", 200);
+                startActivity(intent);
+            }
+        });
         
     }
 
