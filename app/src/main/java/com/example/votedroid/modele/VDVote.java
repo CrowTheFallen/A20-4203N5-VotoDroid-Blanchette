@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
         indices = {@Index("idQuestion")}
 )
 public class VDVote {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public Long id;
     @ColumnInfo
     public int vote;

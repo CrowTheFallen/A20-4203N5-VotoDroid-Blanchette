@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 public class VDQuestion  {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public Long id;
     @ColumnInfo
     public String contenue;

@@ -10,16 +10,15 @@ import android.view.MenuItem;
 import com.example.votedroid.R;
 import com.example.votedroid.repo.MaBD;
 
-public class MainActivity extends AppCompatActivity {
+public class QuestionsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MaBD bd = Room.databaseBuilder(getApplicationContext(), MaBD.class, "MaBD")
-                .allowMainThreadQueries()
-                .build();
+
+        
     }
 
     @Override

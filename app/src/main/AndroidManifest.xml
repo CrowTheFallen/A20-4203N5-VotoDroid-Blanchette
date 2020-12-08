@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".service.MainActivity">
+        <activity android:name=".service.CreateActivity"></activity>
+        <activity android:name=".service.VoteActivity"></activity>
+        <activity android:name=".service.StatsActivity"></activity>
+        <activity android:name=".service.VotesActivity"></activity>
+        <activity android:name=".service.QuestionsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

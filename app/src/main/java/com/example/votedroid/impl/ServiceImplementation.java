@@ -1,31 +1,58 @@
 package com.example.votedroid.impl;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.room.DatabaseConfiguration;
+import androidx.room.InvalidationTracker;
+import androidx.room.Room;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
+
 import com.example.votedroid.exceptions.*;
 import com.example.votedroid.interfaces.Service;
 import com.example.votedroid.modele.VDVote;
 import com.example.votedroid.modele.VDQuestion;
+import com.example.votedroid.repo.MaBD;
+import com.example.votedroid.repo.MonDAO;
+
 
 import java.util.*;
 
 
 public class ServiceImplementation implements Service {
-    private List<VDQuestion> questions = new ArrayList<VDQuestion>();
-    private List<VDVote> votes = new ArrayList<VDVote>();
-    private int idQuestionCompteur;
-    private int idVoteCompteur;
+
+    public MaBD maBD;
+
+    public ServiceImplementation(Context context) {
+        maBD =  Room.databaseBuilder(context, MaBD.class, "MaBD")
+                .allowMainThreadQueries()
+                .build();
+    }
+
+
+
+    //private List<VDQuestion> questions = maBD.dao().tousLesQuestion();
+    //private List<VDVote> votes = maBD.dao().tousLesVotes();
+    //private int idQuestionCompteur;
+    //private int idVoteCompteur;
 
     @Override
     public void ajoutQuestion(VDQuestion question) throws QuestionInvalide, QuestionInvalideLongueur, QuestionInvalideExistante {
         //Validation
         if(question.id != null) throw new QuestionInvalide();
         if(question.contenue.length() < 5 || question.contenue.length() > 255) throw new QuestionInvalideLongueur();
-        for (VDQuestion Q: questions) {
+        // possible méthode DAO aller chercher une questions par son contenu
+        // ou alors si je me souviens viens dao.findAll
+        for (VDQuestion Q: maBD.dao().tousLesQuestion()) {
             if(question.contenue.toUpperCase().equals(Q.contenue.toUpperCase()) )
                 throw new QuestionInvalideExistante(); }
         //Ajout
-        idQuestionCompteur++;
-        question.id = Long.valueOf(idQuestionCompteur);
-        questions.add(question);
+        //idQuestionCompteur++;
+        //question.id = Long.valueOf(idQuestionCompteur);
+        // et maintenant que tout est beau écrire dans la BD
+        // DAO > crééer question
+        //questions.add(question);
+        this.maBD.dao().creerQuestion(question);
     }
 
     @Override
@@ -33,8 +60,10 @@ public class ServiceImplementation implements Service {
         //Validation
         if(vote.id != null) throw new VoteInvalide();
         if(vote.vote < 0 || vote.vote > 5) throw new VoteInvalideLongueur();
-        for (VDQuestion Q: questions) {
-            for (VDVote V: votes){
+        // DAO aller chercher un vote selons la question et la personne
+        // SELECT FROM VDVOTE were questionID = vote.questionID and voteur = vote.voteur
+        for (VDQuestion Q: maBD.dao().tousLesQuestion()) {
+            for (VDVote V: maBD.dao().tousLesVotes()){
                 if(Q.id == vote.idQuestion) {
                     if (vote.nom.toUpperCase().equals(V.nom.toUpperCase()))
                         throw new VoteInvalideExistant();
@@ -44,19 +73,21 @@ public class ServiceImplementation implements Service {
 
         }
         //Ajout
-        idVoteCompteur++;
-        vote.id = Long.valueOf(idVoteCompteur);
-        votes.add(vote);
+        //idVoteCompteur++;
+        //vote.id = Long.valueOf(idVoteCompteur);
+        // DAO > crééer vote
+        //votes.add(vote);
+        this.maBD.dao().creerVote(vote);
     }
 
     @Override
     public List<VDQuestion> questionsParNombreVotes() {
-        List<VDQuestion> questionsParVotes = questions;
+        List<VDQuestion> questionsParVotes = maBD.dao().tousLesQuestion();
         List<Integer> nombreDeVote = new ArrayList<Integer>();
         int compteur;
-        for (VDQuestion Q: questions){
+        for (VDQuestion Q: maBD.dao().tousLesQuestion()){
             compteur = 0;
-            for (VDVote V: votes) {
+            for (VDVote V: maBD.dao().tousLesVotes()) {
                 if(Q.id == V.idQuestion)
                     compteur++;
             }
@@ -85,7 +116,7 @@ public class ServiceImplementation implements Service {
         int compteur3 =0;
         int compteur4 =0;
         int compteur5 =0;
-        for (VDVote V: votes) {
+        for (VDVote V: maBD.dao().tousLesVotes()) {
             if(question.id == V.idQuestion)
                 switch (V.vote){
                 case 0: compteur0++;
@@ -114,10 +145,10 @@ public class ServiceImplementation implements Service {
     @Override
     public double moyennePour(VDQuestion question) {
         double compteur =0;
-        for (VDVote V: votes)
+        for (VDVote V: maBD.dao().tousLesVotes())
             if(question.id == V.idQuestion)
                compteur+= V.vote;
-            compteur= compteur / votes.size();
+            compteur= compteur / maBD.dao().tousLesVotes().size();
         return compteur;
     }
 
@@ -125,12 +156,12 @@ public class ServiceImplementation implements Service {
     public double ecartTypePour(VDQuestion question) {
         List<Integer> liste = new ArrayList<Integer>();
         double compteur =0;
-        for (VDVote V: votes)
+        for (VDVote V: maBD.dao().tousLesVotes())
             if(question.id == V.idQuestion){
                compteur+= V.vote;
                 liste.add(V.vote);
             }
-        compteur= compteur / votes.size();
+        compteur= compteur / maBD.dao().tousLesVotes().size();
 
         double standardDeviation = 0.0;
 

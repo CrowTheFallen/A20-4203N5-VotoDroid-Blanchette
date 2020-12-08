@@ -1,15 +1,28 @@
 package com.example.votedroid;
 
-import com.example.votedroid.exceptions.*;
+import android.content.Context;
+
+import androidx.room.Room;
+
+import com.example.votedroid.exceptions.QuestionInvalide;
+import com.example.votedroid.exceptions.QuestionInvalideExistante;
+import com.example.votedroid.exceptions.QuestionInvalideLongueur;
+import com.example.votedroid.exceptions.VoteInvalide;
+import com.example.votedroid.exceptions.VoteInvalideExistant;
+import com.example.votedroid.exceptions.VoteInvalideLongueur;
 import com.example.votedroid.impl.ServiceImplementation;
 import com.example.votedroid.interfaces.Service;
-import com.example.votedroid.modele.VDVote;
 import com.example.votedroid.modele.VDQuestion;
+import com.example.votedroid.modele.VDVote;
+import com.example.votedroid.repo.MaBD;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestServiceImplementation {
     //Tests pour la création d'une question
+
+
     @Test
     public void testCréationQuestionValide() throws QuestionInvalide, QuestionInvalideLongueur, QuestionInvalideExistante {
         Service service = new ServiceImplementation();
