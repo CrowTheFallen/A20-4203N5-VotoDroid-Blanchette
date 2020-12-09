@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/LaQuestion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:paddingBottom="30dp"
+        android:singleLine="true"
+        android:text="TextView" />
+
+    <Button android:id="@+id/BoutonVersVote"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:layout_alignTop="@+id/LaQuestion"
+        android:layout_alignBottom="@+id/LaQuestion"
+        android:layout_alignRight="@+id/LaQuestion"
+        android:background="@drawable/ic_action_vote"/>
+
+
+
+
+</android.widget.LinearLayout>

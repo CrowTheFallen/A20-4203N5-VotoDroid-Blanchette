@@ -1,6 +1,8 @@
 package com.example.votedroid.service;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +12,13 @@ import android.view.View;
 
 import com.example.votedroid.R;
 import com.example.votedroid.databinding.QuestionActivityBinding;
+import com.example.votedroid.impl.ServiceImplementation;
+import com.example.votedroid.interfaces.Service;
 
 
 public class QuestionsActivity extends AppCompatActivity {
+    Service service;
+    VotesAdaptateur Adapter;
     private QuestionActivityBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +26,8 @@ public class QuestionsActivity extends AppCompatActivity {
         binding = QuestionActivityBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        service = new ServiceImplementation(getApplicationContext());
+        this.initialisationRecyclerView();
         binding.buttonAjouterMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,7 +38,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
     }
 
     @Override
@@ -53,5 +60,17 @@ public class QuestionsActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initialisationRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.RecyclerQuestion);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        Adapter = new VotesAdaptateur(service.questionsParNombreVotes());
+        recyclerView.setAdapter(Adapter);
+
     }
 }

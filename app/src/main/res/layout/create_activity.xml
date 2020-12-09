@@ -25,13 +25,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textShortMessage"
+        android:hint="@string/TaQuestion"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="" />
+        />
     <Button
-        android:id="@+id/FAQ"
+        android:id="@+id/EnvoiQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Pose_La_Question"
