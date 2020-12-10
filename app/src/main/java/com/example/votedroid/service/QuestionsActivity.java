@@ -38,7 +38,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        Adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void initialisationRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.RecyclerQuestion);
+        RecyclerView recyclerView = binding.RecyclerQuestion;
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

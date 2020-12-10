@@ -34,6 +34,7 @@ public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView question;
 
+
         public MyViewHolder(LinearLayout view) {
             super(view);
             // Define click listener for the ViewHolder's View
