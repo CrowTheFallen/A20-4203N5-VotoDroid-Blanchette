@@ -2,8 +2,10 @@ package com.example.votedroid.service;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,6 +24,8 @@ import com.example.votedroid.repo.MaBD;
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyViewHolder> {
 
 
@@ -39,9 +43,19 @@ public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyView
             super(view);
             // Define click listener for the ViewHolder's View
             question = view.findViewById(R.id.LaQuestion);
-        }
+            question.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(),VoteActivity.class);
+                    intent.putExtra("Question", question.getText());
+                    view.getContext().startActivity(intent);
+                }
+            });
 
+
+        }
     }
+
 
     public VotesAdaptateur(List<VDQuestion> listDeQuestion) {
         list = listDeQuestion;
@@ -70,6 +84,9 @@ public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyView
         VDQuestion questionCourante = list.get(position);
         holder.question.setText(questionCourante.contenue);
         Log.i("DEBUGAGE", "Appel de onBindViewHolder" + position);
+
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

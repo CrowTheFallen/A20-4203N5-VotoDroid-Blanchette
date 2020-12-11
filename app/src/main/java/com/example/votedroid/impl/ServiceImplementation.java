@@ -43,7 +43,7 @@ public class ServiceImplementation implements Service {
         if(question.contenue.length() < 5 || question.contenue.length() > 255) throw new QuestionInvalideLongueur();
         // possible méthode DAO aller chercher une questions par son contenu
         // ou alors si je me souviens viens dao.findAll
-        for (VDQuestion Q: maBD.dao().tousLesQuestion()) {
+        for (VDQuestion Q: this.maBD.dao().tousLesQuestion()) {
             if(question.contenue.toUpperCase().equals(Q.contenue.toUpperCase()) )
                 throw new QuestionInvalideExistante(); }
         //Ajout
@@ -62,8 +62,8 @@ public class ServiceImplementation implements Service {
         if(vote.vote < 0 || vote.vote > 5) throw new VoteInvalideLongueur();
         // DAO aller chercher un vote selons la question et la personne
         // SELECT FROM VDVOTE were questionID = vote.questionID and voteur = vote.voteur
-        for (VDQuestion Q: maBD.dao().tousLesQuestion()) {
-            for (VDVote V: maBD.dao().tousLesVotes()){
+        for (VDQuestion Q: this.maBD.dao().tousLesQuestion()) {
+            for (VDVote V: this.maBD.dao().tousLesVotes()){
                 if(Q.id == vote.idQuestion) {
                     if (vote.nom.toUpperCase().equals(V.nom.toUpperCase()))
                         throw new VoteInvalideExistant();
@@ -76,6 +76,7 @@ public class ServiceImplementation implements Service {
         //idVoteCompteur++;
         //vote.id = Long.valueOf(idVoteCompteur);
         // DAO > crééer vote
+
         //votes.add(vote);
         this.maBD.dao().creerVote(vote);
     }

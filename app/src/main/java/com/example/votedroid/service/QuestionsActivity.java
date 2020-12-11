@@ -32,9 +32,6 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(QuestionsActivity.this,CreateActivity.class);
-                //intent.putExtra("id",12);
-                //intent.putExtra("age", 25);
-                //intent.putExtra("Cash", 200);
                 startActivity(intent);
             }
         });
@@ -70,6 +67,7 @@ public class QuestionsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         Adapter = new VotesAdaptateur(service.questionsParNombreVotes());
+
         recyclerView.setAdapter(Adapter);
 
     }

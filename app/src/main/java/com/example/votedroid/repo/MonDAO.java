@@ -41,10 +41,10 @@ public abstract class MonDAO {
     }
     @Transaction
     public Long creerQuestionVote(VDQuestion a, VDVote ps){
-        Long Id = this.creerQuestion(a);
-        ps.idQuestion = Id;
-        this.creerVote(ps);
-        return Id;
+
+        ps.idQuestion = a.id;
+
+        return ps.idQuestion;
     }
 
 }

@@ -22,10 +22,14 @@ public class VotesActivity extends AppCompatActivity {
         binding.LaQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(VotesActivity.this,VoteActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.BoutonVersStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(VotesActivity.this,StatsActivity.class);
-                //intent.putExtra("id",12);
-                //intent.putExtra("age", 25);
-                //intent.putExtra("Cash", 200);
                 startActivity(intent);
             }
         });
