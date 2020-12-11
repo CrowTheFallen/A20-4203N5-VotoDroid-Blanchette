@@ -49,11 +49,16 @@ public class QuestionsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.Supprime_votes) {
+            new ServiceImplementation(getApplicationContext()).maBD.dao().supprimeLesVotes();
+
 
             return true;
         }
         if (id == R.id.Supprime_Question) {
-
+            new ServiceImplementation(getApplicationContext()).maBD.dao().supprimeLesVotes();
+            new ServiceImplementation(getApplicationContext()).maBD.dao().supprimeLesQuestionOuAucunVote();
+            Intent intent = new Intent(QuestionsActivity.this,QuestionsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

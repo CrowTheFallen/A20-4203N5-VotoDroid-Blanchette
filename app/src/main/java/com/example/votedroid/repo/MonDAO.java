@@ -30,6 +30,15 @@ public abstract class MonDAO {
     @Query("SELECT * FROM VDVote")
     public abstract List<VDVote> tousLesVotes();
 
+    @Query("DELETE FROM VDVote")
+    public abstract void supprimeLesVotes();
+
+    //@Query("SELECT * FROM VDVote join VDQuestion where VDQuestion.id = VDVote.idQuestion"; "DELETE"   SELECT VDVote.idQuestion FROM VDVote join VDQuestion where VDQuestion.id != VDVote.idQuestion )
+    //(SELECT VDVote.idQuestion FROM VDVote inner join VDQuestion on VDQuestion.id = VDVote.idQuestion)
+    //SELECT VDVote.idQuestion FROM VDVote join VDQuestion on VDQuestion.id == VDVote.idQuestion
+    @Query("DELETE FROM VDQuestion")
+    public abstract void supprimeLesQuestionOuAucunVote();
+
     @Transaction
     public Long creerQuestionVotes(VDQuestion a, List<VDVote> ps){
         Long Id = this.creerQuestion(a);
