@@ -2,21 +2,24 @@ package com.example.votedroid.impl;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
 import androidx.room.Room;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-import com.example.votedroid.exceptions.*;
+import com.example.votedroid.exceptions.QuestionInvalide;
+import com.example.votedroid.exceptions.QuestionInvalideExistante;
+import com.example.votedroid.exceptions.QuestionInvalideLongueur;
+import com.example.votedroid.exceptions.VoteInvalide;
+import com.example.votedroid.exceptions.VoteInvalideExistant;
+import com.example.votedroid.exceptions.VoteInvalideLongueur;
 import com.example.votedroid.interfaces.Service;
-import com.example.votedroid.modele.VDVote;
 import com.example.votedroid.modele.VDQuestion;
+import com.example.votedroid.modele.VDVote;
 import com.example.votedroid.repo.MaBD;
-import com.example.votedroid.repo.MonDAO;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class ServiceImplementation implements Service {

@@ -1,14 +1,14 @@
 package com.example.votedroid.service;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.votedroid.R;
 import com.example.votedroid.databinding.QuestionActivityBinding;
@@ -57,8 +57,8 @@ public class QuestionsActivity extends AppCompatActivity {
         if (id == R.id.Supprime_Question) {
             new ServiceImplementation(getApplicationContext()).maBD.dao().supprimeLesVotes();
             new ServiceImplementation(getApplicationContext()).maBD.dao().supprimeLesQuestionOuAucunVote();
-            Intent intent = new Intent(QuestionsActivity.this,QuestionsActivity.class);
-            startActivity(intent);
+            Intent refresh = new Intent(this, QuestionsActivity.class);
+            startActivity(refresh);
             return true;
         }
         return super.onOptionsItemSelected(item);

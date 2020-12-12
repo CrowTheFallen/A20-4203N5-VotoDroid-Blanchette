@@ -3,12 +3,10 @@ package com.example.votedroid.service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Dao;
 
-import com.example.votedroid.R;
-import com.example.votedroid.databinding.QuestionActivityBinding;
 import com.example.votedroid.databinding.VoteActivityBinding;
 import com.example.votedroid.exceptions.VoteInvalide;
 import com.example.votedroid.exceptions.VoteInvalideExistant;
@@ -17,7 +15,6 @@ import com.example.votedroid.impl.ServiceImplementation;
 import com.example.votedroid.interfaces.Service;
 import com.example.votedroid.modele.VDQuestion;
 import com.example.votedroid.modele.VDVote;
-import com.example.votedroid.repo.MaBD;
 import com.example.votedroid.repo.MonDAO;
 
 public class VoteActivity extends AppCompatActivity {
@@ -52,10 +49,13 @@ public class VoteActivity extends AppCompatActivity {
                 try {
                     service.ajoutVote(vote);
                 } catch (VoteInvalide voteInvalide) {
+                    Toast.makeText(VoteActivity.this, "Le ID du vote ne peut pas être attribuer avant le vote",Toast.LENGTH_LONG).show();
                     voteInvalide.printStackTrace();
                 } catch (VoteInvalideLongueur voteInvalideLongueur) {
+                    Toast.makeText(VoteActivity.this, "Le vote doit être entre 0 et 5 étoiles",Toast.LENGTH_LONG).show();
                     voteInvalideLongueur.printStackTrace();
                 } catch (VoteInvalideExistant voteInvalideExistant) {
+                    Toast.makeText(VoteActivity.this, "Le nom de votant existe déjà sur cette question",Toast.LENGTH_LONG).show();
                     voteInvalideExistant.printStackTrace();
                 }
 

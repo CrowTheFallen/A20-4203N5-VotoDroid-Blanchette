@@ -1,30 +1,21 @@
 package com.example.votedroid.service;
 
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.example.votedroid.R;
 import com.example.votedroid.modele.VDQuestion;
-import com.example.votedroid.modele.VDVote;
-import com.example.votedroid.repo.MaBD;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyViewHolder> {
 
@@ -37,7 +28,7 @@ public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyView
      */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView question;
-
+        public ImageButton imageButton;
 
         public MyViewHolder(LinearLayout view) {
             super(view);
@@ -52,6 +43,15 @@ public class VotesAdaptateur extends RecyclerView.Adapter<VotesAdaptateur.MyView
                 }
             });
 
+            imageButton = view.findViewById(R.id.BoutonVersStats);
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(),StatsActivity.class);
+                    intent.putExtra("Question", question.getText());
+                    view.getContext().startActivity(intent);
+                }
+            });
 
         }
     }

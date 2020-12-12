@@ -3,12 +3,11 @@ package com.example.votedroid.service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.votedroid.R;
 import com.example.votedroid.databinding.CreateActivityBinding;
-import com.example.votedroid.databinding.QuestionActivityBinding;
 import com.example.votedroid.exceptions.QuestionInvalide;
 import com.example.votedroid.exceptions.QuestionInvalideExistante;
 import com.example.votedroid.exceptions.QuestionInvalideLongueur;
@@ -37,10 +36,13 @@ public class CreateActivity extends AppCompatActivity {
                 try {
                     service.ajoutQuestion(question);
                 } catch (QuestionInvalide questionInvalide) {
+                    Toast.makeText(CreateActivity.this, "La question doit pas avoir de id avant le moment de sa création",Toast.LENGTH_LONG).show();
                     questionInvalide.printStackTrace();
                 } catch (QuestionInvalideLongueur questionInvalideLongueur) {
+                    Toast.makeText(CreateActivity.this, "La question doit être d'une longueur entre 5 et 255 caractères",Toast.LENGTH_LONG).show();
                     questionInvalideLongueur.printStackTrace();
                 } catch (QuestionInvalideExistante questionInvalideExistante) {
+                    Toast.makeText(CreateActivity.this, "La question est soit non conforme ou déjà existant",Toast.LENGTH_LONG).show();
                     questionInvalideExistante.printStackTrace();
                 }
                 startActivity(intent);
